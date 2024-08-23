@@ -13,6 +13,18 @@
 void NaiveMatrixMultiply(Matrix *input0, Matrix *input1, Matrix *result)
 {
     //@@ Insert code to implement naive matrix multiply here
+    int row0 = input0->shape[0];
+    int col0 = input0->shape[1];
+    int row1 = input1->shape[0];
+    int col1 = input1->shape[1];
+
+    for (int i = 0; i < row0; i++){
+        for(int j = 0; j < col1; j++){
+            for(int k = 0; k < row1; k++){
+                result->data[i*col1 + j] += input0->data[col0*i + k]*input1->data[col1*k +j];
+            }
+        }
+    }
 }
 
 int main(int argc, char *argv[])
@@ -45,6 +57,9 @@ int main(int argc, char *argv[])
     int rows, cols;
     //@@ Update these values for the output rows and cols of the output
     //@@ Do not use the results from the answer matrix
+    rows = host_a.shape[0];
+    cols = host_b.shape[1];
+
 
     // Allocate the memory for the target.
     host_c.shape[0] = rows;
